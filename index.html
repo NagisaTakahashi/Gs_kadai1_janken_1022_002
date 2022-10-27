@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>じゃんけん</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>じゃんけん</h1>
+    </header>
+
+    <main>
+
+        <session class="main_session">
+            <ul>
+                <li id="gu_btn" class="human_hands"><img src="img/human_gu.png" id="human_hands_img"><p>Guuu!</p></li>
+                <li id="choki_btn" class="human_hands" ><img src="img/human_choki.png" id="human_hands_img"><p>Choki!</p></li>
+                <li id="par_btn" class="human_hands" ><img src="img/human_par.png" id="human_hands_img"><p>Paaa!</p></li>
+            </ul>
+
+            <img src="img/vs.png" id="vs" alt="vs">
+
+            <div  id="pc_before_img">
+                <div><img src="img/pc_before.png" id="gazou_kirikae"></div>
+                <p id="nanigaderukana">なにが出るかな？</p>
+            </div>
+
+        </session>
+
+        <div class="moji">
+            <div class="choice">あなたが選んだ手は？<br>「<span id="human_hands">ここに表示</span>」</div>
+            <div class="choice">コンピュータの出した手は？<br>「<span id="pc_hands">ここに表示</span>」</div>
+            <div class="kekka">勝敗<br>
+                <img src="img/kekkaha.png" id="kekka_img" alt="kekka"><br>
+                <span id="judgement"></span></div>
+        </div>
+
+        
+    </main>
+
+    <footer></footer>
+
+    <script>
+
+        //1.人間ハンズ,PCハンズの選択肢を変数配列にいれる。それぞれ数字に置き換える（代入する）★配列を使用
+
+        let str_human_hands = ['グー', 'チョキ', 'パー'];
+        let str_pc_hands = ['グー', 'チョキ', 'パー'];
+
+
+        //2.人間ハンズが選んだものを表示する
+
+        let human = 0; //人間の選んだ選択肢の数字を代入する箱を用意する★
+
+        let view =""; //人間の選んだ選択肢の画像を代入する箱を用意する★
+
+        $("#gu_btn").on("click", function() {
+            $("#human_hands").html(str_human_hands[0]);
+            human = 0; //ハコに選んだ選択肢にひもづく数値をいれてあげる処理
+            console.log(human,"人間が選んだ選択肢の数字");
+            $("#human_hands_img").view='<img src="img/human_gu.png" width="200">';
+        });        
+
+
+
+
+ 
+
+        $("#choki_btn").on("click", function() {
+            $("#human_hands").html(str_human_hands[1]);
+            human = 1; //ハコに選んだ選択肢にひもづく数値をいれてあげる処理
+            console.log(human,"人間が選んだ選択肢の数字");
+        });
+
+        $("#par_btn").on("click", function() {
+            $("#human_hands").html(str_human_hands[2]);
+            human = 2; //ハコに選んだ選択肢にひもづく数値をいれてあげる処理
+            console.log(human,"人間が選んだ選択肢の数字");
+        });
+
+     
+
+        //3.PCハンズの選択を繰り出すための乱数を生成する（1-3）
+        //4.上記3.と同時イベントでPCハンズが選んだものを表示する
+
+        let pc = 0 //pcの数字を代入する箱を用意する★
+
+        $(".human_hands").on('click', function(){          
+            var pc_random = Math.floor(Math.random() * 3);
+            console.log(pc_random, "ランダム生成した結果の数字");
+            $("#nanigaderukana").text(""); //なにがでるかなを消す
+            if (pc_random === 0) {
+                console.log("PCの手：グー");
+                $("#pc_hands").text(str_pc_hands[0]);
+                pc = 0; //ハコに選んだ選択肢にひもづく数値をいれてあげる処理
+                $("#gazou_kirikae").attr("src","img/pc_gu.png"); //PCハンズの画像表示切り替え
+            } else if (pc_random === 1) {
+                console.log("PCの手：チョキ");
+                $("#pc_hands").text(str_pc_hands[1]);
+                pc = 1; //ハコに選んだ選択肢にひもづく数値をいれてあげる処理
+                $("#gazou_kirikae").attr("src","img/pc_choki.png"); //PCハンズの画像表示切り替え
+            } else if (pc_random === 2) {
+                console.log("PCの手：パー");
+                $("#pc_hands").text(str_pc_hands[2]);
+                pc = 2; //ハコに選んだ選択肢にひもづく数値をいれてあげる処理
+                $("#gazou_kirikae").attr("src","img/pc_par.png"); //PCハンズの画像表示切り替え
+            } 
+        } );
+
+
+
+        //5.人間ハンズとPCハンズの勝ち負け判定のif分岐処理
+        //6.上記5.と同時イベントで勝ち負け結果を表示
+
+
+        $(".human_hands").on('click', function(){    
+
+            var judgement = human - pc ; //勝ち負けを判定するための計算式
+
+            console.log(judgement, "勝敗");      
+              if (judgement == 0 ) {
+                console.log("あいこ");
+                $("#judgement").text("あいこ"); 
+                $("#kekka_img").attr("src","img/kekka_draw.png");
+                //勝敗の画像表示切り替え
+                $(this).fadeIn(5000); 
+            } else if (judgement == -1 || judgement == 2 ) {
+                console.log(judgement, "勝ち");
+                $("#judgement").text("勝ち");
+                $("#kekka_img").attr("src","img/kekka_win.png");
+                //勝敗の画像表示切り替え
+                $(this).fadeIn(5000); 
+            } else if (judgement == -2 || judgement == 1 ) {
+                console.log(judgement, "負け");
+                $("#judgement").text("負け");
+                $("#kekka_img").attr("src","img/kekka_lose.png");
+                //勝敗の画像表示切り替え
+                $(this).fadeIn(5000);
+            } 
+        } );
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

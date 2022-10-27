@@ -1,0 +1,114 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:center;
+    font-size: 2rem;
+}
+header{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+main{
+    border-bottom:1px solid #ccc;
+}
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+
+.main_session{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+h1{
+    color:#E88D80;
+ }
+
+p{
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:auto;
+    margin: 0 0 2vh;
+    color:#6D5E55;
+}
+ul{
+    padding: 0;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+li{
+    list-style-type:none;
+    background-color: #FFF;
+    width: 35%;
+    height: auto; 
+    object-fit: cover;
+    cursor: pointer;    
+    padding: 3vh;
+}
+
+#human_hands_img {
+    width:  100%;       /* ※縦横を同値に */
+    border-radius: 50%;  /* 角丸半径を50%にする */
+    border: solid 1px #6D5E55;
+}
+
+#pc_before_img{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    width: 40%;
+}
+
+
+
+
+li:hover{
+    background: #F7F2F0;
+    border-radius: 10%;
+    color:#6D5E55;
+}
+
+
+p:hover{
+    background-color: #E88D80;
+    color: #FFF;
+}
+
+.moji{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.choice{
+    width: 49.5%;
+    padding: 30px 0;
+}
+
+.kekka{
+    padding: 30px 0;
+}
+
+
+#judgement{
+    background-color: #E88D80;
+    color: #FFF;
+    font-size: 100px;
+}
+
+#vs{
+    margin: auto;
+    width: 10%;
+    height: 10%;
+}
+
+#kekka_img{
+    width: 800px;
+}
